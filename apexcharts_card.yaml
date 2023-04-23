@@ -1,78 +1,22 @@
-title: Home
-background: var(--background-image)
-views:
-  - theme: Backend-selected
-    title: McFit
-    path: mcfit
-    icon: mdi:dumbbell
-    badges: []
-    cards:
-      - square: true
-        columns: 4
-        type: grid
-        cards:
-          - type: gauge
-            entity: sensor.mcfit_occupation_giesing
-            severity:
-              green: 0
-              yellow: 50
-              red: 70
-            needle: false
-          - type: gauge
-            entity: sensor.mcfit_occupation_schwabing
-            severity:
-              green: 0
-              yellow: 50
-              red: 70
-            needle: false
-          - type: gauge
-            entity: sensor.mcfit_occupation_forstenried
-            severity:
-              green: 0
-              yellow: 50
-              red: 70
-            needle: false
-          - type: gauge
-            entity: sensor.mcfit_occupation_laim
-            severity:
-              green: 0
-              yellow: 50
-              red: 70
-            needle: false
-      - type: custom:apexcharts-card
-        header:
-          show: true
-          title: McFit Occupation
-          show_states: true
-          colorize_states: true
-        graph_span: 7d
-        series:
-          - entity: sensor.mcfit_occupation_giesing
-            name: Giesing
-          - entity: sensor.mcfit_occupation_schwabing
-            name: Schwabing
-            stroke_width: 1
-            opacity: 0.3
-          - entity: sensor.mcfit_occupation_forstenried
-            name: Forstenried
-            stroke_width: 1
-            opacity: 0.3
-          - entity: sensor.mcfit_occupation_laim
-            name: Laim
-            stroke_width: 1
-            opacity: 0.3
-          - entity: binary_sensor.night
-            curve: stepline
-            type: area
-            transform: 'return x === "off" ? 0 : 120 ;'
-            color: grey
-            stroke_width: 0
-            opacity: 0.3
-            show:
-              in_header: false
-              legend_value: false
-        apex_config:
-          yaxis:
-            tickAmount: 5
-            min: 0
-            max: 100
+type: custom:apexcharts-card
+brush:
+  selection_span: 1d
+experimental:
+  brush: true
+graph_span: 1w
+header:
+  show: true
+  title: ApexCharts-Card
+  show_states: true
+  colorize_states: true
+yaxis:
+  - min: 0
+    max: 100
+all_series_config:
+  show:
+    in_brush: true
+series:
+  - entity: sensor.mcfit_utilization_laim
+  - entity: sensor.mcfit_utilization_giesing
+  - entity: sensor.mcfit_utilization_forstenried
+  - entity: sensor.mcfit_utilization_schwabing
